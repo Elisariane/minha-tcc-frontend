@@ -1,0 +1,40 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.header-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-title img {
+    margin-right: 15px;
+}
+
+.buttons a {
+    margin: 5px;
+}
+
+.buttons .btn-secondary {
+    background: #B2B2B2;
+    border-color: #B2B2B2;
+}
+
+.buttons .btn-secondary:hover {
+    transition: 0.5ms;
+    background: #9b9b9b;
+}
+
+.buttons .btn-primary {
+    background-color: #000;
+    border: none;
+}
+
+.buttons .btn-primary:hover {
+    background-color: #444444;
+    transition: 0.5ms;
+}

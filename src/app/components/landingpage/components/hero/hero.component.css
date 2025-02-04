@@ -1,0 +1,9 @@
+h1, p {
+    color: white;
+}
+
+.hero {
+    background-image: url("../../../../../assets/img/hero-img.jpg");
+    height: 464px;
+    align-content: center;
+}
