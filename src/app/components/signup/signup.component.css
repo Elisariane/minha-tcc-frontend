@@ -76,3 +76,7 @@ body {
         display: none;
     }
 }
+
+.error-msg {
+    color: rgba(255, 0, 0, 0.541);
+}

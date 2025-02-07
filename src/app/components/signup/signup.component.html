@@ -1,42 +1,68 @@
 <div class="container">
-    <div class="container-body">
-        <div class="form-register">
-            <div class="form-header">
-                <h3>Crie sua conta e comece sua jornada!</h3>
-                <p>Estamos prontos para ajudar você!</p>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Confirme sua Senha</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="center">
-                            <button type="submit" class="btn btn-primary center">Cadastrar</button>
-                        </div>
-                    </form>
+<div class="container-body">
+    <div class="form-register">
+    <div class="form-header">
+        <h3>Crie sua conta e comece sua jornada!</h3>
+        <p>Estamos prontos para ajudar você!</p>
+    </div>
+    <div class="card">
+        <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+            <!-- Nome -->
+            <div class="mb-3">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            @if(form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)) {
+                <div class="error-msg">
+                {{ getErrorMessage('name') }}
                 </div>
+            }
             </div>
 
-            <p>Já tem uma conta? <a routerLink="/signin">Entrar</a></p>
-        </div>
+            <!-- Email -->
+            <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+            @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+                <div class="error-msg">
+                {{ getErrorMessage('email') }}
+                </div>
+            }
+            </div>
 
-        <div class="hero-section">
-            <img src="../../../assets/img/img-animation-out-of-box.png" alt="">
+            <!-- Senha -->
+            <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+                <div class="error-msg">
+                {{ getErrorMessage('password') }}
+                </div>
+            }
+            </div>
+
+            <!-- Confirmar Senha -->
+            <div class="mb-3">
+            <label for="passwordConfirmed" class="form-label">Confirme sua Senha</label>
+            <input type="password" class="form-control" id="passwordConfirmed" formControlName="passwordConfirmed">
+            @if(form.get('passwordConfirmed')?.invalid && (form.get('passwordConfirmed')?.dirty || form.get('passwordConfirmed')?.touched)) {
+                <div class="error-msg">
+                {{ getErrorMessage('passwordConfirmed') }}
+                </div>
+            }
+            </div>
+
+            <!-- Botão de envio -->
+            <div class="center">
+            <button type="submit" class="btn btn-primary center" [disabled]="form.invalid">Cadastrar</button>
+            </div>
+        </form>
         </div>
     </div>
+    <p>Já tem uma conta? <a routerLink="/signin">Entrar</a></p>
+    </div>
+    <div class="hero-section">
+    <img src="../../../assets/img/img-animation-out-of-box.png" alt="">
+    </div>
+</div>
 </div>

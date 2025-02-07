@@ -8,17 +8,27 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form  [formGroup]="form" (ngSubmit)="onSubmit($event)">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+                            @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+                                <div class="error-msg">
+                                {{ getErrorMessage('email') }}
+                                </div>
+                            }
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password" formControlName="password">
+                                @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+                                    <div class="error-msg">
+                                    {{ getErrorMessage('password') }}
+                                    </div>
+                                }
+                                </div>
                         <div class="center">
-                            <button type="submit" class="btn btn-primary center">Entrar</button>
+                            <button type="submit" class="btn btn-primary center" [disabled]="form.invalid">Entrar</button>
                         </div>
                     </form>
                 </div>
