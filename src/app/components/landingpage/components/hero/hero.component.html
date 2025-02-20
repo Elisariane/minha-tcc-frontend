@@ -1,8 +1,14 @@
-<div class="hero">
-    <div class="px-4 py-5 text-center">
-        <h1 class="display-5 fw-bold ">Minha TCC</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">A sua caixa de ferramentas para sua terapia</p>
-        </div>
+<div class="hero flex flex-col items-center text-center py-10 justify-center">
+    <h1 class="text-4xl !font-bold">Minha TCC</h1>
+    <div class="max-w-lg mx-auto">
+        <p class="text-lg text-gray-700 mt-2">A sua caixa de ferramentas para sua terapia</p>
     </div>
+    <div class="flex !space-x-4 py-10 justify-center">
+        <a routerLink="/signup" class="!px-6 py-2 bg-purple-500 text-white rounded-lg shadow-md hover:bg-purple-600 transition !no-underline">
+            Cadastrar
+        </a>
+        <a routerLink="/signin" class="!px-6 py-2 bg-gray-100 !text-purple-600 rounded-lg shadow-md hover:bg-gray-200 transition !no-underline">
+            Entrar
+        </a>
+    </div>    
 </div>
