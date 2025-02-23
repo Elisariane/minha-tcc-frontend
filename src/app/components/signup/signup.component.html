@@ -1,68 +1,69 @@
-<div class="container">
-<div class="container-body">
-    <div class="form-register">
-    <div class="form-header">
-        <h3>Crie sua conta e comece sua jornada!</h3>
-        <p>Estamos prontos para ajudar você!</p>
-    </div>
-    <div class="card">
-        <div class="card-body">
+<div class="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-50 px-4">
+    <!-- Formulário -->
+    <div class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow-md">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-800">Crie sua conta e comece sua jornada!</h3>
+            <p class="text-gray-600">Estamos prontos para ajudar você!</p>
+        </div>
+
         <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
             <!-- Nome -->
-            <div class="mb-3">
-            <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
-            @if(form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)) {
-                <div class="error-msg">
-                {{ getErrorMessage('name') }}
-                </div>
-            }
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-medium">Nome</label>
+                <input type="text" id="name" formControlName="name"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('name') }}</div>
+                }
             </div>
 
             <!-- Email -->
-            <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
-            @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
-                <div class="error-msg">
-                {{ getErrorMessage('email') }}
-                </div>
-            }
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium">Email</label>
+                <input type="email" id="email" formControlName="email"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('email') }}</div>
+                }
             </div>
 
             <!-- Senha -->
-            <div class="mb-3">
-            <label for="password" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
-            @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
-                <div class="error-msg">
-                {{ getErrorMessage('password') }}
-                </div>
-            }
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 font-medium">Senha</label>
+                <input type="password" id="password" formControlName="password"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('password') }}</div>
+                }
             </div>
 
             <!-- Confirmar Senha -->
-            <div class="mb-3">
-            <label for="passwordConfirmed" class="form-label">Confirme sua Senha</label>
-            <input type="password" class="form-control" id="passwordConfirmed" formControlName="passwordConfirmed">
-            @if(form.get('passwordConfirmed')?.invalid && (form.get('passwordConfirmed')?.dirty || form.get('passwordConfirmed')?.touched)) {
-                <div class="error-msg">
-                {{ getErrorMessage('passwordConfirmed') }}
-                </div>
-            }
+            <div class="mb-4">
+                <label for="passwordConfirmed" class="block text-gray-700 font-medium">Confirme sua Senha</label>
+                <input type="password" id="passwordConfirmed" formControlName="passwordConfirmed"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('passwordConfirmed')?.invalid && (form.get('passwordConfirmed')?.dirty || form.get('passwordConfirmed')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('passwordConfirmed') }}</div>
+                }
             </div>
 
             <!-- Botão de envio -->
-            <div class="center">
-            <button type="submit" class="btn btn-primary center" [disabled]="form.invalid">Cadastrar</button>
+            <div class="text-center mt-4">
+                <button type="submit"
+                    class="w-full py-2 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition"
+                    [disabled]="form.invalid">
+                    Cadastrar
+                </button>
             </div>
         </form>
-        </div>
+
+        <p class="text-center text-gray-600 mt-4">Já tem uma conta? <a routerLink="/signin"
+                class="text-purple-500 font-semibold hover:underline">Entrar</a></p>
     </div>
-    <p>Já tem uma conta? <a routerLink="/signin">Entrar</a></p>
+
+    <!-- Imagem Lateral -->
+    <div class="hidden md:block md:w-1/2 p-8">
+        <img src="../../../assets/img/img-animation-out-of-box.png" alt="Animação"
+            class="w-full max-w-md mx-auto">
     </div>
-    <div class="hero-section">
-    <img src="../../../assets/img/img-animation-out-of-box.png" alt="">
-    </div>
-</div>
 </div>

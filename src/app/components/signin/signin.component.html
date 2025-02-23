@@ -1,44 +1,50 @@
-<div class="container">
-    <div class="container-body">
-        <div class="form-register">
-            <div class="form-header">
-                <h3>BEM VINDO(A) DE VOLTA!</h3>
-                <p>Estamos aqui para ajudar você a cuidar da sua saúde mental.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <form  [formGroup]="form" (ngSubmit)="onSubmit($event)">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
-                            @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
-                                <div class="error-msg">
-                                {{ getErrorMessage('email') }}
-                                </div>
-                            }
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="password" formControlName="password">
-                                @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
-                                    <div class="error-msg">
-                                    {{ getErrorMessage('password') }}
-                                    </div>
-                                }
-                                </div>
-                        <div class="center">
-                            <button type="submit" class="btn btn-primary center" [disabled]="form.invalid">Entrar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <p>Ainda não tem uma conta <a routerLink="/signup"> Cadastre-se</a></p>
+<div class="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-50 px-4">
+    <!-- Formulário -->
+    <div class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow-md">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-800">BEM-VINDO(A) DE VOLTA!</h3>
+            <p class="text-gray-600">Estamos aqui para ajudar você a cuidar da sua saúde mental.</p>
         </div>
 
-        <div class="hero-section">
-            <img src="../../../assets/img/img-animation-out-of-box.png" alt="">
-        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+            <!-- Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium">Email</label>
+                <input type="email" id="email" formControlName="email"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('email') }}</div>
+                }
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 font-medium">Senha</label>
+                <input type="password" id="password" formControlName="password"
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                @if(form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+                    <div class="text-red-500 text-sm mt-1">{{ getErrorMessage('password') }}</div>
+                }
+            </div>
+
+            <!-- Botão de envio -->
+            <div class="text-center mt-4">
+                <button type="submit"
+                    class="w-full py-2 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition"
+                    [disabled]="form.invalid">
+                    Entrar
+                </button>
+            </div>
+        </form>
+
+        <p class="text-center text-gray-600 mt-4">Ainda não tem uma conta? 
+            <a routerLink="/signup" class="text-purple-500 font-semibold hover:underline">Cadastre-se</a>
+        </p>
+    </div>
+
+    <!-- Imagem Lateral -->
+    <div class="hidden md:block md:w-1/2 p-8">
+        <img src="../../../assets/img/img-animation-out-of-box.png" alt="Animação"
+            class="w-full max-w-md mx-auto">
     </div>
 </div>
