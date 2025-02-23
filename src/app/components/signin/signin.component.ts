@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { IUser } from '../../../interfaces/IUser';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +17,11 @@ export class SigninComponent {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
       this.form = this.fb.group(
         {
           email: ['', [Validators.required, Validators.email]],
@@ -27,7 +33,17 @@ export class SigninComponent {
   onSubmit(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
-      console.log('Formulário válido:', this.form.value);
+      const user: IUser = this.form.value;
+
+      this.authService.login(user).subscribe({
+        next: (user) => {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['/home'])
+        }, 
+        error: (error) => {
+          console.error('Error no cadastro: ', error)
+        }
+      });
     }
   }
 

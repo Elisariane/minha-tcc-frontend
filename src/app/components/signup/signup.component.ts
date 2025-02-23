@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 export class SignupComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.form = this.fb.group(
       {
         name: ['', [Validators.required, Validators.minLength(3)]],
@@ -60,7 +65,16 @@ export class SignupComponent {
   onSubmit(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
-      console.log('Formulário válido:', this.form.value);
+      const user = this.form.value;
+
+      this.authService.register(user).subscribe({
+        next: (response) => {
+          this.router.navigate(['/signin'])
+        },
+        error: (error) => {
+          console.error('Error no cadastro: ', error)
+        }
+      })
     }
   }
 }
