@@ -39,7 +39,7 @@ export class SigninComponent {
         next: (user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.router.navigate(['/home'])
-        }, 
+        },
         error: (error) => {
           console.error('Error no cadastro: ', error)
         }

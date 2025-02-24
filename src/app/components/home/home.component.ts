@@ -11,12 +11,13 @@ import { AuthService } from '../../auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  currentUser: IUser | null = null;
+  currentUser : IUser | null = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
+    console.log(this.currentUser);
   }
 
 }
