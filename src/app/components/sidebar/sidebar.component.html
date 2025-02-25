@@ -1,0 +1,104 @@
+<div class="flex">
+    <!-- Sidebar -->
+    <div [ngClass]="{'w-64': isOpen, 'w-16': !isOpen}" 
+            class="h-screen bg-gray-800 text-white transition-all duration-300 flex flex-col rounded-4xl ml-2">
+        <div class="flex justify-between">
+            <h1 class="text-white text-xl m-4 font-bold p-2" *ngIf="isOpen">Minha TCC</h1>
+            <button (click)="toggleSidebar()" 
+                class="m-4 p-2 focus:outline-none cursor-pointer"
+                (mouseenter)="showTooltip('Expandir')" (mouseleave)="hideTooltip()"
+            >
+                <i class="fa-solid fa-bars text-2xl hover:fill-gray-400 transition "></i>
+            </button>
+            
+            <div *ngIf="!isOpen && tooltip === 'Expandir'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Expandir
+            </div>
+        </div>
+
+    <nav class="flex-1 px-2">
+        <a routerLink="/home" class="relative flex items-center py-2 px-4 rounded hover:bg-gray-700"
+            (mouseenter)="showTooltip('Dashboard')" (mouseleave)="hideTooltip()"
+        >
+            <i class="fa-solid fa-dashboard mr-2"></i> 
+            <span *ngIf="isOpen"> Dashboard</span>
+
+            <div *ngIf="!isOpen && tooltip === 'Dashboard'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Dashboard
+            </div>
+        </a>
+
+        <a href="#" class="relative flex items-center py-2 px-4 rounded hover:bg-gray-700"
+            (mouseenter)="showTooltip('Controle de Humor')" (mouseleave)="hideTooltip()"
+        >
+            <i class="fa-solid fa-smile mr-2"></i> 
+            <span *ngIf="isOpen"> Controle de Humor</span>
+
+            <div *ngIf="!isOpen && tooltip === 'Controle de Humor'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Controle de Humor
+            </div>
+        </a>
+        
+
+        <a href="#" class="relative flex items-center py-2 px-4 rounded hover:bg-gray-700"
+            (mouseenter)="showTooltip('RPD')" (mouseleave)="hideTooltip()"
+        >
+            <i class="fa-solid fa-book mr-2"></i> 
+            <span *ngIf="isOpen"> RPD</span>
+
+            <div *ngIf="!isOpen && tooltip === 'RPD'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    RPD
+            </div>
+        </a>
+
+        <a href="#" class="relative flex items-center py-2 px-4 rounded hover:bg-gray-700"
+        (mouseenter)="showTooltip('Diário Alimentar')" (mouseleave)="hideTooltip()"
+        >
+            <i class="fa-solid fa-cutlery mr-2"></i> 
+            <span *ngIf="isOpen"> Diário Alimentar</span>
+
+            <div *ngIf="!isOpen && tooltip === 'Diário Alimentar'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Diário Alimentar
+            </div>
+        </a>
+
+        <a href="#" class="relative flex items-center py-2 px-4 rounded hover:bg-gray-700"
+        (mouseenter)="showTooltip('Pensamento Socrático')" (mouseleave)="hideTooltip()"
+        >
+            <i class="fa-solid fa-comments mr-2"></i> 
+            <span *ngIf="isOpen"> Pensamento Socrático</span>
+
+            <div *ngIf="!isOpen && tooltip === 'Pensamento Socrático'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Pensamento Socrático
+            </div>
+        </a>
+    </nav>
+
+    <div class="border-t border-gray-400 flex p-3">
+        <i class="fa fa-user-circle text-2xl text-white p-2" *ngIf="isOpen"></i>
+        <div
+            class="flex justify-between items-center overflow-hidden transition-all"
+            [ngClass]="{ 'w-52 ml-3': isOpen, 'w-0': !isOpen }"
+        >
+            <div class="leading-4">
+            <h4 class="font-semibold">{{ currentUser?.name}}</h4>
+            <span class="text-xs text-gray-600">{{ currentUser?.email}}</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-sign-out cursor-pointer text-2xl p-2" (click)="logout()"
+        (mouseenter)="showTooltip('Sair')" (mouseleave)="hideTooltip()"
+        ></i>
+        <div *ngIf="!isOpen && tooltip === 'Sair'"
+                    class="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                    Sair
+        </div>
+    </div>
+
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { IUser } from '../interfaces/IUser';
 import { INewUser } from '../interfaces/INewUser';
 import { jwtDecode } from 'jwt-decode';
 import { tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,11 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<IUser | null>;
   public currentUser: Observable<IUser | null>; 
 
-  constructor(private http: HttpClient) { 
-    this.currentUserSubject = new BehaviorSubject<IUser | null>(this.getUserFromToken(''));
+  constructor(private http: HttpClient, private router: Router) { 
+    const storedEmail = localStorage.getItem('currentUser.email') || '';
+    this.currentUserSubject = new BehaviorSubject<IUser | null>(this.getUserFromToken(storedEmail));
     this.currentUser = this.currentUserSubject.asObservable();
-  }
+}
 
   register(user: INewUser): Observable<any> {
     return this.http.post(this.apiUrlRegister, user, { responseType: 'text' }).pipe(
@@ -48,6 +50,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/'])
   }
 
   private getUserFromToken(email: string): IUser | null {
@@ -56,10 +59,9 @@ export class AuthService {
 
     try {
       const decoded: any = jwtDecode(token);
-      console.log(decoded);
       return { 
         name: decoded.sub || 'Usuário',
-        email: email
+        email: email || decoded.email || localStorage.getItem('currentUser.email') || ''
       };
     } catch (error) {
       console.error('Erro ao decodificar o token:', error);
